@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/widgets.css">
     <link rel="stylesheet" href="assets/css/dark.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 
@@ -174,7 +177,7 @@
                                     class="elegant-icon icon_search mr-5"></i>Search</span></button>-->
                         <div style="display: none;" class="dark-light-mode-cover">
                             <a class="dark-light-mode" href="#"></a>
-                        </div> 
+                        </div>
                         <a class="btn btn-radius bg-primary text-white ml-15 font-small box-shadow d-none"
                             href="https://themeforest.net/item/stories-personal-blog-html-template/28453702"
                             target="_blank">Buy Now</a>
@@ -189,7 +192,7 @@
                     <nav>
                         <!--Desktop menu-->
                         <ul class="main-menu d-none d-lg-inline font-small">
-                            <li ><a href="index.html"> <i class="elegant-icon icon_house_alt mr-5"></i> Home</a></li>
+                            <li><a href="index.html"> <i class="elegant-icon icon_house_alt mr-5"></i> Home</a></li>
                             <li> <a href="about.html">About Us</a> </li>
                             <li><a href="category-list.html">Blog</a></li>
                         </ul>
@@ -317,7 +320,8 @@
                         <a class="author-avatar" href="#"><img class="img-circle" src="assets/imgs/authors/author-3.jpg"
                                 alt="">
                         </a>
-                        By <a href="author.html"><span class="author-name font-weight-bold text-white" id="author">loading...</span></a>
+                        By <a href="author.html"><span class="author-name font-weight-bold text-white"
+                                id="author">loading...</span></a>
                     </p>
                 </div>
             </div>
@@ -326,6 +330,10 @@
             <article class="entry-wraper mb-50">
                 <div class="excerpt mb-30">
                     <p id="description">Loading...</p>
+                </div>
+                <div class="swiper" style="width: 100%; display: flex; column-gap: 10px;">
+                    <div class="swiper-wrapper" id="swiper-container"></div>
+                    <div class="swiper-scrollbar"></div>
                 </div>
                 <div class="entry-main-content dropcap wow fadeIn animated" id="content">
                     Loading...
@@ -336,7 +344,7 @@
                         <div id="tags"></div>
                     </div>
                 </div>
-                <div class="single-social-share clearfix wow fadeIn animated">
+                <div class="d-none single-social-share clearfix wow fadeIn animated">
                     <div class="entry-meta meta-1 font-small color-grey float-start mt-10">
                         <span class="hit-count mr-15"><i class="elegant-icon icon_comment_alt mr-5"></i>182
                             comments</span>
@@ -433,7 +441,7 @@
                                     <div class="col-md-4">
                                         <div class="post-thumb position-relative border-radius-5">
                                             <div class="img-hover-slide border-radius-5 position-relative"
-                                                style="background-image: url(assets/imgs/news/news-4.jpg)">
+                                                style="background-image: url(assets/imgs/news/news-4.jpg);">
                                                 <a class="img-link" href="single.html"></a>
                                             </div>
                                             <ul class="social-share">
@@ -1026,6 +1034,32 @@
     <script src="assets/js/vendor/jquery.theia.sticky.js"></script>
     <!-- NewsBoard JS -->
     <script src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            direction: 'horizontal',
+            loop: false,
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+            slidesPerView: 1,
+            spaceBetween: 10,
+            breakpoints: {
+                320: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                },
+                480: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                },
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 40
+                }
+            }
+        });
+    </script>
     <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -1034,22 +1068,30 @@
             .then(x => x.json())
             .then(y => displayBlog(y));
 
-            const displayBlog = (e) => {
-                console.log(e)
-                if (!e.error) {
-                    document.getElementById("content").innerHTML = e.blog.content
-                    document.getElementById("title").innerHTML = e.blog.title
-                    document.getElementById("author").innerHTML = e.blog.author
-                    document.getElementById("tags").innerHTML = ""
-                    document.getElementById("description").innerHTML = e.blog.description
-                    document.getElementById("bg").style.backgroundImage = `url(${e.blog.mainImg})`
-                    document.title = `Knock Dubai - ${e.blog.title}`
-                    for (let index = 0; index < e.blog.tags.split(",").length; index++) {
-                        const element = e.blog.tags.split(",")[index];
-                        document.getElementById("tags").innerHTML += `<a rel="tag">${element}</a>`;
-                    }
+        const displayBlog = (e) => {
+            if (!e.error) {
+                document.getElementById("content").innerHTML = e.blog.content
+                document.getElementById("title").innerHTML = e.blog.title
+                document.getElementById("author").innerHTML = e.blog.author
+                document.getElementById("tags").innerHTML = ""
+                document.getElementById("description").innerHTML = e.blog.description
+                document.getElementById("bg").style.backgroundImage = `url(${e.blog.mainImg})`
+                document.title = `Knock Dubai - ${e.blog.title}`
+                for (let index = 0; index < e.blog.tags.split(",").length; index++) {
+                    const element = e.blog.tags.split(",")[index];
+                    document.getElementById("tags").innerHTML += `<a rel="tag">${element}</a>`;
+                }
+                document.getElementById('swiper-container').innerHTML = ""
+                for (let index = 0; index < e.blog.otherImgs.length; index++) {
+                    const element = e.blog.otherImgs[index];
+                    document.getElementById('swiper-container').innerHTML += `
+                    <div class="swiper-slide"><img style="height: 300px; border-radius: 20px; object-fit: cover"
+                                src="${element}"
+                                alt=""></div>
+                    `
                 }
             }
+        }
     </script>
 </body>
 
