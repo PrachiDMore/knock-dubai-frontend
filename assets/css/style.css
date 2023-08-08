@@ -124,6 +124,19 @@ h6,
 .btn,
 .post-title{font-style:normal;font-weight:500;text-transform:none;font-family:'Poppins';}
 p{margin-bottom:1.2em;font-weight:400}
+.whatsapp-icon{
+	height: 40px;
+	border-radius: 50%;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 20px;
+	left: 30px;
+	background-color: #25D366;
+	z-index: 6000;
+}
 .img{max-width:100%;-webkit-transition:all .2s ease-out 0s;-moz-transition:all .2s ease-out 0s;-ms-transition:all .2s ease-out 0s;-o-transition:all .2s ease-out 0s;transition:all .2s ease-out 0s}
 .img-circle{border-radius:50%;}
 .overflow-hidden{overflow:hidden}
