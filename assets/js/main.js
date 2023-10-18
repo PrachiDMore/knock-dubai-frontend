@@ -4,6 +4,7 @@
     // Page loading
     $(window).on('load', function() {
         $('.preloader').fadeOut('slow');
+        // $('#popup_form').fadeIn('slow');
     });
 
     // Scroll progress
