@@ -224,17 +224,17 @@
         }
     };
 
-    //Header sticky
-    var headerSticky = function() {
-        $(window).on('scroll', function() {
-            var scroll = $(window).scrollTop();
-            if (scroll < 245) {
-                $(".header-sticky").removeClass("sticky-bar");
-            } else {
-                $(".header-sticky").addClass("sticky-bar");
-            }
-        });
-    };
+    // //Header sticky
+    // var headerSticky = function() {
+    //     $(window).on('scroll', function() {
+    //         var scroll = $(window).scrollTop();
+    //         if (scroll < 245) {
+    //             $(".header-sticky").removeClass("sticky-bar");
+    //         } else {
+    //             $(".header-sticky").addClass("sticky-bar");
+    //         }
+    //     });
+    // };
 
     // Scroll up to top
     var scrollToTop = function() {
@@ -432,7 +432,7 @@
         customScrollbar();
         magPopup();
         scrollToTop();
-        headerSticky();
+        // headerSticky();
         stickySidebar();
         customSlickSlider();
         megaMenu();
