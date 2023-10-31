@@ -186,7 +186,7 @@
                             <li> <a href="about.html">About Us</a> </li>
                             <li> <a href="category-list.html">Blog</a> </li>
                             <li class="menu-item-has-children">
-                                <a >Area</a>
+                                <a>Area</a>
                                 <ul class="sub-menu text-muted font-small"
                                     style="background-color: #ffffff !important; border: 1px solid #eee;">
                                     <li><a href="area.html">Mumbai</a></li>
@@ -196,13 +196,14 @@
                             </li>
                         </ul>
                         <!--Mobile menu-->
-                        <ul id="mobile-menu" class="d-block d-lg-none text-muted">
+                        <ul id="mobile-menu" class="d-block d-lg-none text-muted" style="z-index: 10000000; background: white;">
                             <li><a href="index.html">Home</a></li>
                             <li><a href="about.html">About Us</a></li>
                             <li><a href="category-list.html">Blog</a></li>
                             <li class="menu-item-has-children">
-                                <a >Area</a>
-                                <ul class="sub-menu text-muted font-small" style="background-color: #ffffff !important; border: 1px solid #eee;">
+                                <a>Area</a>
+                                <ul class="sub-menu text-muted font-small"
+                                    style="background-color: #ffffff !important; border: 1px solid #eee;">
                                     <li><a href="area.html">Mumbai</a></li>
                                     <li><a href="area.html">Dubai</a></li>
                                     <li><a href="area.html">Banglore</a></li>
@@ -211,15 +212,15 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="float-end header-tools text-muted font-small"
-                    style="display: flex; justify-content: center; align-items: center;">
+                <div class="float-end header-tools text-muted font-small hide-sm"
+                    style="display: flex; justify-content: center; align-items: center; ">
                     <ul class="header-social-network d-inline-block list-inline mr-15">
                         <li class="bg-instagram p-1 border-radius-5">
                             <a target="_blank" href="#"><i class="fa fa-instagram"
                                     style="font-size:16px;color:#ffffff"></i></a>
                         </li>
                     </ul>
-                    <div id="google_translate_element"></div>
+                    <div class="d-lg-block hide-sm" id="google_translate_element"></div>
                     <!-- <div class="off-canvas-toggle-cover d-inline-block">
                         <div class="off-canvas-toggle hidden d-inline-block" id="off-canvas-toggle">
                             <span></span>
@@ -1236,12 +1237,12 @@
                                 info@knockdubai.ae
                             </p>
                             <p><strong class="color-black">Follow me</strong><br>
-                                <ul class="header-social-network d-inline-block list-inline ">
-                                    <li class="bg-instagram p-1 border-radius-5">
-                                        <a target="_blank" href="#"><i class="fa fa-instagram"
-                                                style="font-size:16px;color:#ffffff"></i></a>
-                                    </li>
-                                </ul>
+                            <ul class="header-social-network d-inline-block list-inline ">
+                                <li class="bg-instagram p-1 border-radius-5">
+                                    <a target="_blank" href="#"><i class="fa fa-instagram"
+                                            style="font-size:16px;color:#ffffff"></i></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1290,10 +1291,11 @@
         </div>
     </footer>
     <!-- End Footer -->
-    
+
     <!-- Popup form -->
-    <div id="popup_form" style="width: 100vw; height: 100vh; position: fixed; top: 0vh; z-index: 5000; background-color: #00000074; display: flex; justify-content: center; align-items: center; transition: 300ms; opacity: 0; pointer-events: none;">
-        <div style=" height: 80vh; width: 70vw; background-color: #ffffff; border-radius: 10px; ">
+    <div id="popup_form"
+        style="width: 100vw; height: 100vh; position: fixed; top: 0vh; z-index: 5000; background-color: #00000074; display: flex; justify-content: center; align-items: center; transition: 300ms; opacity: 0; pointer-events: none;">
+        <div style=" height: 80vh; width: 70vw; background-color: #ffffff; border-radius: 10px; overflow-y: auto;">
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 0px 30px;">
                 <i class="fa-solid fa-xmark fa-lg" style="opacity: 0;"></i>
                 <h1 class="mt-30 text-center">Get in touch</h1>
@@ -1333,8 +1335,8 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <textarea class="form-control w-100" style="min-height: 120px !important; height: 120px;" name="message" id="message" cols="30" rows="5"
-                                placeholder="Message"></textarea>
+                            <textarea class="form-control w-100" style="min-height: 120px !important; height: 120px;"
+                                name="message" id="message" cols="30" rows="5" placeholder="Message"></textarea>
                         </div>
                     </div>
                 </div>
@@ -1369,15 +1371,20 @@
     <script>
         const popup = document.getElementById("popup_form")
         const body = document.getElementById("body")
-        const closeForm = () =>{
-            popup.style.opacity=0;
-            popup.style.pointerEvents="none"
-            body.style.overflow="auto"
+        const closeForm = () => {
+            popup.style.opacity = 0;
+            popup.style.pointerEvents = "none"
+            body.style.overflow = "auto"
+            sessionStorage.setItem("view_popup", false)
         }
-        const openForm = () =>{
-            popup.style.opacity=1;
-            popup.style.pointerEvents="all"
-            body.style.overflow="hidden"
+        const openForm = () => {
+            if (sessionStorage.getItem("view_popup") === null || sessionStorage.getItem("view_popup") === undefined) {
+                popup.style.opacity = 1;
+                popup.style.pointerEvents = "all"
+                body.style.overflow = "hidden"
+            } else {
+                return
+            }
         }
         setTimeout(openForm, 3000);
     </script>
@@ -1433,12 +1440,46 @@
         // function which will translate the web page using google translator  
         function googleTranslateElementInit() {
             new google.translate.TranslateElement(
-                { pageLanguage: 'en', 
-                includedLanguages: 'ru,ar,zh-CN,de,en', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE, },
+                {
+                    pageLanguage: 'en',
+                    includedLanguages: 'ru,ar,zh-CN,de,en',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                },
                 'google_translate_element'
             );
         }  
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        const name = document.getElementById("name")
+        const email = document.getElementById("email")
+        const phone_number = document.getElementById("phone_number")
+        const query = document.getElementById("query")
+        const message = document.getElementById("message")
+
+        const formButton = document.getElementById("form")
+
+        formButton.addEventListener("click", (e) => {
+            // e.target.disabled = true
+            axios('http://localhost:5000/contact-us', {
+                method: 'POST',
+                data: {
+                    "name": name.value,
+                    "email": email.value,
+                    "phone_number": phone_number.value,
+                    "query": query.value,
+                    "message": message.value,
+                    // "queryType": "Property Enquiry"
+                }
+            })
+                .then((res) => {
+                    // console.log(res.data)
+                    sessionStorage.setItem("view_popup", false)
+                })
+            // e.target.disabled = false;
+        })
+
     </script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
