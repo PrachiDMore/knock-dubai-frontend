@@ -175,7 +175,8 @@
             </div>
         </div>
         <div class="header-sticky">
-            <div class="container align-self-center position-relative" style="display: flex; align-items: center; justify-content: space-between; width: auto;">
+            <div class="container align-self-center position-relative"
+                style="display: flex; align-items: center; justify-content: space-between; width: auto;">
                 <div class="mobile_menu d-lg-none d-block"></div>
                 <div class="main-nav d-none d-lg-block float-start">
                     <nav>
@@ -185,11 +186,10 @@
                             <li> <a href="about.html">About Us</a> </li>
                             <li> <a href="category-list.html">Blog</a> </li>
                             <li class="menu-item-has-children">
-                                <a >Area</a>
-                                <ul class="sub-menu text-muted font-small">
-                                    <li><a href="area.html">Mumbai</a></li>
-                                    <li><a href="area.html">Dubai</a></li>
-                                    <li><a href="area.html">Banglore</a></li>
+                                <a>Area</a>
+                                <ul class="sub-menu text-muted font-small"
+                                    style="background-color: #ffffff !important; border: 1px solid #eee;"
+                                    id="area_dropdown">
                                 </ul>
                             </li>
                         </ul>
@@ -199,12 +199,10 @@
                             <li><a href="about.html">About Us</a></li>
                             <li><a href="category-list.html">Blog</a></li>
                             <li class="menu-item-has-children">
-                                <a >Area</a>
-                                <ul class="sub-menu text-muted font-small" style="background-color: #ffffff !important; border: 1px solid #eee;">
-                                    <li><a href="index.html">Mumbai</a></li>
-                                    <li><a href="index.html">Dubai</a></li>
-                                    <li><a href="index.html">Banglore</a></li>
-                                </ul>
+                                <a>Area</a>
+                                <ul class="sub-menu text-muted font-small"
+                                    style="background-color: #ffffff !important; border: 1px solid #eee;"
+                                    id="mobile_dropdown"></ul>
                             </li>
                         </ul>
                     </nav>
@@ -532,12 +530,12 @@
                                 info@knockdubai.ae
                             </p>
                             <p><strong class="color-black">Follow me</strong><br>
-                                <ul class="header-social-network d-inline-block list-inline ">
-                                    <li class="bg-instagram p-1 border-radius-5">
-                                        <a target="_blank" href="#"><i class="fa fa-instagram"
-                                                style="font-size:16px;color:#ffffff"></i></a>
-                                    </li>
-                                </ul>
+                            <ul class="header-social-network d-inline-block list-inline ">
+                                <li class="bg-instagram p-1 border-radius-5">
+                                    <a target="_blank" href="#"><i class="fa fa-instagram"
+                                            style="font-size:16px;color:#ffffff"></i></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -607,18 +605,43 @@
     <!-- NewsBoard JS -->
     <script src="assets/js/main.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const area_dropdown = document.getElementById("area_dropdown");
+        const mobile_dropdown = document.getElementById("mobile_dropdown");
+        axios('https://knock-dubai-backend.vercel.app/get-locality', {
+            method: 'GET',
+        })
+            .then((res) => {
+                for (let index = 0; index < res.data.response.length; index++) {
+                    const element = res.data.response[index];
+                    area_dropdown.innerHTML += ` <li class="capitalize" ><a href="area.html?id=${element._id}">${element.city}</a></li>`
+                    mobile_dropdown.innerHTML += ` <li class="capitalize" ><a href="area.html?id=${element._id}">${element.city}</a></li>`
+                }
+            })
+        // e.target.disabled = false;
+    </script>
+  
     <script>
         const elements = document.getElementById("blog-listing");
-        fetch("https://knock-dubai-backend.vercel.app/get-blogs")
-            .then(x => x.json())
-            .then(y => renderBlogs(y));
-
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get('id');
+        axios('https://knock-dubai-backend.vercel.app/blogs-by-location', {
+            method: 'POST',
+            data : {
+                locationId: id
+            }
+        })
+            .then((res) => {
+                console.log(res.data.response)
+               renderBlogs(res.data?.response)
+            })
         const renderBlogs = (e) => {
-            console.log(e)
             elements.innerHTML = ""
             if (!e.error) {
-                for (let index = 0; index < e.blogs.length; index++) {
-                    const element = e.blogs[index];
+                for (let index = 0; index < e.length; index++) {
+                    const element = e[index];
                     const time = moment(element.createdAt).format("D MMMM");
                     elements.innerHTML += `
                 <article class="hover-up-2 transition-normal wow fadeInUp animated">
@@ -673,9 +696,11 @@
         // function which will translate the web page using google translator  
         function googleTranslateElementInit() {
             new google.translate.TranslateElement(
-                { pageLanguage: 'en', 
-                includedLanguages: 'ru,ar,zh-CN,de,en', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE, },
+                {
+                    pageLanguage: 'en',
+                    includedLanguages: 'ru,ar,zh-CN,de,en',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                },
                 'google_translate_element'
             );
         }  

@@ -188,10 +188,7 @@
                             <li class="menu-item-has-children">
                                 <a>Area</a>
                                 <ul class="sub-menu text-muted font-small"
-                                    style="background-color: #ffffff !important; border: 1px solid #eee;">
-                                    <li><a href="area.html">Mumbai</a></li>
-                                    <li><a href="area.html">Dubai</a></li>
-                                    <li><a href="area.html">Banglore</a></li>
+                                    style="background-color: #ffffff !important; border: 1px solid #eee;" id="area_dropdown">
                                 </ul>
                             </li>
                         </ul>
@@ -203,11 +200,7 @@
                             <li class="menu-item-has-children">
                                 <a>Area</a>
                                 <ul class="sub-menu text-muted font-small"
-                                    style="background-color: #ffffff !important; border: 1px solid #eee;">
-                                    <li><a href="area.html">Mumbai</a></li>
-                                    <li><a href="area.html">Dubai</a></li>
-                                    <li><a href="area.html">Banglore</a></li>
-                                </ul>
+                                    style="background-color: #ffffff !important; border: 1px solid #eee;" id="mobile_dropdown"></ul>
                             </li>
                         </ul>
                     </nav>
@@ -606,6 +599,22 @@
     <!-- NewsBoard JS -->
     <script src="assets/js/main.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const area_dropdown = document.getElementById("area_dropdown");
+        const mobile_dropdown = document.getElementById("mobile_dropdown");
+         axios('https://knock-dubai-backend.vercel.app/get-locality', {
+                method: 'GET',
+            })
+                .then((res) => {
+                  for (let index = 0; index < res.data.response.length; index++) {
+                    const element = res.data.response[index];
+                    area_dropdown.innerHTML += ` <li class="capitalize" ><a href="area.html?id=${element._id}">${element.city}</a></li>`
+                    mobile_dropdown.innerHTML += ` <li class="capitalize" ><a href="area.html?id=${element._id}">${element.city}</a></li>`
+                  }
+                })
+            // e.target.disabled = false;
+    </script>
     <script>
         const elements = document.getElementById("blog-listing");
         fetch("https://knock-dubai-backend.vercel.app/get-blogs")

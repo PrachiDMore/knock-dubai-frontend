@@ -645,3 +645,7 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 /* .VIpgJd-ZVi9od-l4eHX-hSRGPd{
 	display: none !important;
 } */
+
+.capitalize{
+	text-transform: capitalize;
+}
