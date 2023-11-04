@@ -189,16 +189,15 @@
                         </ul>
                         <!--Mobile menu-->
                         <ul id="mobile-menu" class="d-block d-lg-none text-muted">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="category-list.html">Blog</a></li>
                             <li class="menu-item-has-children">
                                 <a >Area</a>
                                 <ul class="sub-menu text-muted font-small" id="mobile_dropdown">
-                                    <li><a href="index.html">Home default</a></li>
-                                    <li><a href="home-2.html">Homepage 2</a></li>
-                                    <li><a href="home-3.html">Homepage 3</a></li> 
+                                    <li style="opacity: 0; position: absolute; top: 0; left: 0; z-index: -100000;"><a href="index.html">Home default</a></li>
                                 </ul>
                             </li>
-                            
-                            
                             <li class="menu-item-has-children"><a href="#">Single post</a>
                                 <ul class="sub-menu font-small">
                                     <li><a href="single.html">Default</a></li>
@@ -211,12 +210,13 @@
                     </nav>
                 </div>
                 <div class="float-end header-tools text-muted font-small">
-                    <ul class="header-social-network d-inline-block list-inline mr-15">
+                    <!-- <ul class="header-social-network d-inline-block list-inline mr-15">
                         <li class="bg-instagram p-1 border-radius-5">
                             <a target="_blank" href="#"><i class="fa fa-instagram"
                                     style="font-size:16px;color:#ffffff"></i></a>
                         </li>
-                    </ul>
+                    </ul> -->
+                    <div id="google_translate_element"></div>
                     <!-- <div class="off-canvas-toggle-cover d-inline-block">
                         <div class="off-canvas-toggle hidden d-inline-block" id="off-canvas-toggle">
                             <span></span>
@@ -606,6 +606,8 @@
     <script>
         const area_dropdown = document.getElementById("area_dropdown");
         const mobile_dropdown = document.getElementById("mobile_dropdown");
+        console.dir(mobile_dropdown)
+        if(mobile_dropdown){
         axios('https://knock-dubai-backend.vercel.app/get-locality', {
             method: 'GET',
         })
@@ -616,6 +618,21 @@
                     mobile_dropdown.innerHTML += ` <li class="capitalize" ><a href="area.html?id=${element._id}">${element.city}</a></li>`
                 }
             })
+        }
+        else{
+            const area_dropdown = document.getElementById("area_dropdown");
+        const mobile_dropdown = document.getElementById("mobile_dropdown");
+            axios('https://knock-dubai-backend.vercel.app/get-locality', {
+            method: 'GET',
+        })
+            .then((res) => {
+                for (let index = 0; index < res.data.response.length; index++) {
+                    const element = res.data.response[index];
+                    area_dropdown.innerHTML += ` <li class="capitalize" ><a href="area.html?id=${element._id}">${element.city}</a></li>`
+                    mobile_dropdown.innerHTML += ` <li class="capitalize" ><a href="area.html?id=${element._id}">${element.city}</a></li>`
+                }
+            })
+        }
         // e.target.disabled = false;
     </script>
 
