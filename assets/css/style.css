@@ -43,10 +43,9 @@ TABLE CONTENT
 
 /*Google fonts
 	font-family: 'Crimson Text', serif;
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Noto Sans JP', sans-serif;
 */
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans+JP:wght@400;500;700;900&amp;display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root{
 	--color-mode:"light";
 	--color-primary:#5869DA;
@@ -111,32 +110,9 @@ button.bg-primary:hover{background-color:var(--color-danger)!important;}
 .border-radius-3{border-radius:3px;}
 .border-radius-5{border-radius:5px;}
 .border-radius-10{border-radius:10px;}
-.bg-instagram{
-  background: #f09433; 
-background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
-background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
-/* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 ); */
-  }
-.whats-app {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    bottom: 40px;
-    right: 35px;
-    background-color: #25d366;
-    color: #FFF;
-    border-radius: 50px;
-    display: flex;
-		justify-content: center;
-		align-items: center;
-    font-size: 25px;
-		box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.75);
-    z-index: 100;
-}
 
 /* GENERAL */
-body{font-family:'Poppins';font-weight:normal;font-style:normal;font-size:14px;}
+body{font-family:'Noto Sans JP',sans-serif;font-weight:normal;font-style:normal;font-size:14px;}
 h1,
 h2,
 h3,
@@ -145,21 +121,8 @@ h5,
 h6,
 .font-heading,
 .btn,
-.post-title{font-style:normal;font-weight:500;text-transform:none;font-family:'Poppins';}
+.post-title{font-style:normal;font-weight:500;text-transform:none;font-family:'Noto Sans JP',sans-serif;}
 p{margin-bottom:1.2em;font-weight:400}
-.whatsapp-icon{
-	height: 40px;
-	border-radius: 50%;
-	width: 40px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	bottom: 20px;
-	left: 30px;
-	background-color: #25D366;
-	z-index: 6000;
-}
 .img{max-width:100%;-webkit-transition:all .2s ease-out 0s;-moz-transition:all .2s ease-out 0s;-ms-transition:all .2s ease-out 0s;-o-transition:all .2s ease-out 0s;transition:all .2s ease-out 0s}
 .img-circle{border-radius:50%;}
 .overflow-hidden{overflow:hidden}
@@ -279,7 +242,7 @@ h1.logo{font-weight:700;font-size:30px;line-height:1;margin:0;}
 .line-dots::after{content:'';height:1px;width:100%;border-bottom:dotted 1px #222;position:absolute;top:2px;left:0;}
 button.search-icon{border:none;background:none;padding:0;font-weight:500;line-height:1;}
 .header-social-network{line-height:1}
-.header-social-network .list-inline-item a{background:var(--color-primary);width:24px;display:block;height:24px;border-radius:30px;line-height:24px;text-align:center; display:flex; justify-content: center; align-items:center; font-size:11px;color:#fff!important;}
+.header-social-network .list-inline-item a{background:var(--color-primary);width:24px;display:block;height:24px;border-radius:30px;line-height:24px;text-align:center;font-size:11px;color:#fff!important;}
 .header-social-network .list-inline-item:not(:last-child){margin-right:7px}
 
 /*Offcanvas Sidebar*/
@@ -636,16 +599,4 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 @keyframes shadow-pulse-big{
 	0%{box-shadow:0 0 0 0px rgba(88,108,218,0.1);}
 	100%{box-shadow:0 0 0 20px rgba(0,0,0,0);}
-}
-.nice-select{
-	width: 100%;
-	margin-bottom: 1rem;
-}
-
-/* .VIpgJd-ZVi9od-l4eHX-hSRGPd{
-	display: none !important;
-} */
-
-.capitalize{
-	text-transform: capitalize;
 }

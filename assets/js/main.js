@@ -4,7 +4,6 @@
     // Page loading
     $(window).on('load', function() {
         $('.preloader').fadeOut('slow');
-        // $('#popup_form').fadeIn('slow');
     });
 
     // Scroll progress
@@ -46,12 +45,20 @@
 
     // Mobile menu
     var mobileMenu = function() {
+        const element = document.getElementById("test_card");
         var menu = $('ul#mobile-menu');
         if (menu.length) {
             menu.slicknav({
                 prependTo: ".mobile_menu",
                 closedSymbol: '+',
-                openedSymbol: '-'
+                openedSymbol: '-',
+                beforeOpen: function() {
+                    // Code to execute before the menu is opened
+                },
+                beforeClose: function() {
+                    // Code to execute before the menu is closed
+                    console.log('Menu is about to close');
+                }
             });
         };
     };
@@ -224,17 +231,17 @@
         }
     };
 
-    // //Header sticky
-    // var headerSticky = function() {
-    //     $(window).on('scroll', function() {
-    //         var scroll = $(window).scrollTop();
-    //         if (scroll < 245) {
-    //             $(".header-sticky").removeClass("sticky-bar");
-    //         } else {
-    //             $(".header-sticky").addClass("sticky-bar");
-    //         }
-    //     });
-    // };
+    //Header sticky
+    var headerSticky = function() {
+        $(window).on('scroll', function() {
+            var scroll = $(window).scrollTop();
+            if (scroll < 245) {
+                $(".header-sticky").removeClass("sticky-bar");
+            } else {
+                $(".header-sticky").addClass("sticky-bar");
+            }
+        });
+    };
 
     // Scroll up to top
     var scrollToTop = function() {
@@ -432,7 +439,7 @@
         customScrollbar();
         magPopup();
         scrollToTop();
-        // headerSticky();
+        headerSticky();
         stickySidebar();
         customSlickSlider();
         megaMenu();

@@ -14,9 +14,6 @@
     .entry-wraper,
     .entry-header.entry-header-style-1,
     .single-comment{max-width:800px;margin:0 auto;}
-    .navbar-width{
-        width: auto;
-    }
 }
 
 /* Tablet desktop :768px. */
@@ -31,29 +28,11 @@
     .header-tools{position:relative;z-index:999}
     .preloader::before,
     .counter{font-size:8em}
-    .navbar-width{
-        width: 100%;
-        z-index: 5990;
-        display: flex;
-        justify-content: end;
-    }
-    .hide-sm{
-        display: none !important;
-    }
 }
 
 /* small mobile :768px. */
 @media (max-width:767px){
     .comment-form .name{padding-right:0px;margin-bottom:1rem;}
-    .navbar-width{
-        width: 100%;
-        z-index: 5990;
-        display: flex;
-        justify-content: end;
-    }
-    .hide-sm{
-        display: none !important;
-    }
 }
 
 /* Large Mobile :480px. */
@@ -74,15 +53,6 @@
     .featured-slider-2-items .post-thumb .thumb-overlay{min-height:450px;}
     .featured-slider-2 .post-content-overlay .post-title{max-width:100%;}
     .featured-slider-2-nav{display:none}
-    .navbar-width{
-        width: 100%;
-        z-index: 5990;
-        display: flex;
-        justify-content: end;
-    }
-    .hide-sm{
-        display: none !important;
-    }
 }
 
 /*Masonry layout*/
